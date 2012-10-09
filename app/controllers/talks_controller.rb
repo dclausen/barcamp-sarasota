@@ -5,11 +5,11 @@ class TalksController < ApplicationController
     respond_to do |format|
       format.html do
         @day = Talk.logical_day
-        @talks = Talk.all(:conditions => ["day = ?", @day], :include => :room, :with_deleted => true, :order => "day, start_time")
+        @talks = Talk.all(:conditions => ["day = ?", @day], :include => :room, :with_deleted => false, :order => "day, start_time")
       end
 
       format.json do
-        @talks = Talk.all(:include => :room, :with_deleted => true, :order => "day, start_time")
+        @talks = Talk.all(:include => :room, :with_deleted => false, :order => "day, start_time")
       end
     end
   end

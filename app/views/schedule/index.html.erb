@@ -1,0 +1,48 @@
+<% if logged_in? %>
+	<div class="admin-links">
+		<%= link_to "New Talk", new_talk_path %> | <%= link_to "Manage Rooms", rooms_path %> | <%= link_to "Manage Sponsors", sponsors_path %>
+	</div>
+<%end%>
+   
+<ul>
+  <%- @rooms.each do |room| -%>
+    <li class="room_name">
+      <h3 class="head"><%= room.name %></h3>
+      <ul>
+        <%- if room.talks.empty? -%>
+          <li class="no_talks"><%= NO_TALKS %></li>
+
+        <%- else -%>
+          <%= render :partial => "talks", :locals => { :daypart_description => "Morning",   :talks => room.talks.morning.for_logical_day }%>
+          <%= render :partial => "talks", :locals => { :daypart_description => "Afternoon", :talks => room.talks.afternoon.for_logical_day }%>
+        <%- end -%>
+      </ul>
+    </li>
+  <%- end -%>
+</ul>
+
+<ul>
+  <li class="sponsors">
+    <h3 class="head">Sponsors:</h3>
+
+    <ul>
+      <%- @sponsors_by_level.each do |level,sponsors| -%>
+        <%- sponsors.each do |sponsor| -%>
+          <li><%= link_to( sponsor.name, sponsor.homepage, { :target => "_blank" } ) %></li>
+        <%- end -%>
+      <% end %>
+    </ul>
+  </li>
+</ul>
+
+<% content_for :header do %>
+  <div id="alternatives">
+  	<%= link_to( "Text Version", "/schedule.txt" ) %>
+  	<% link_to( "iPhone Version", "/schedule.iphone" ) %>
+  	<%= link_to( "RSS Feed", "/schedule.rss" ) %>
+  </div>
+<% end %>
+
+<% content_for :head do %>
+  <link href="/schedule.rss" rel="alternate" type="application/rss+xml" title="RSS Feed" />
+<% end %>

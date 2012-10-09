@@ -1,0 +1,10 @@
+.DS_Store
+coverage
+db/*.sqlite3
+doc/app/*
+log/*.log
+tmp/*
+tmp/**/*
+config/deploy.rb
+deploy.rb
+.powenv

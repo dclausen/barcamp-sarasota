@@ -1,0 +1,11 @@
+.row
+  .span12
+    %h3 Talk Information
+    %p Title: #{@talk.name}
+    %p Room: #{@talk.room.name}
+    %p Speaker: #{@talk.who}
+    %p Description: #{@talk.description}
+
+.row
+  .span2{ :style => "padding-top: 10px" }
+    = link_to "Back to talks", talks_path, :class => "btn"

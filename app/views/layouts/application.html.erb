@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>BarCamp Tampa Bay 2012</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag "bootstrap.min" %>
+    <%= stylesheet_link_tag "bootstrap-responseive.min" %>
+
+    <% stylesheet_link_tag "style" %>
+	  <% stylesheet_link_tag "style2" %>
+
+    <% javascript_include_tag 'jquery-1.2.6' %>
+    <% javascript_include_tag 'jquery.corner' %>
+    <% javascript_include_tag 'talk_bubbles' %>
+    <% javascript_include_tag 'corners' %>
+
+	  <%= yield :head %>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="login offset8" style="padding: 20px">
+          <% if logged_in? %>
+            <p>You are logged in as <%= current_user.login %> (<%= link_to "logout", logout_path %>)</p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span12" style="padding-bottom: 20px;text-align: center">
+          <%= link_to image_tag("bcsrq-header-banner-2012-fall.gif", :width => "50%"), root_path %>
+        </div>
+      </div>
+
+      <%= yield :header %>
+
+      <% if flash[:notice] %>
+        <div class="alert alert-info"><%= flash[:notice] %></div>
+      <% end %>
+
+      <%= yield %>
+
+      <%= yield :footer %>
+    </div>
+  </body>
+</html>
